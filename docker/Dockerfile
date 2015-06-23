@@ -13,8 +13,8 @@ ENV         SERVICE_DIR             /etc/service/SERVICE_NAME
 
 RUN set -e && \
     apt-get update -y && \
-    apt-get install -y  nodejs npm
-    useradd -m -d /home/$USER -p $USER -s /bin/bash $USER && \
+    apt-get install -y nodejs npm && \
+    useradd -m -d $USER_DIR -p $USER -s /bin/bash $USER && \
     chown -R $USER:$USER $USER_DIR && \
     mkdir -p $USER_LOGGING_DIR && \
     chmod oug+rw -R $USER_LOGGING_DIR
