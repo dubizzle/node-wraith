@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM        phusion/baseimage:0.9.16
 
 MAINTAINER  Mahmoud <mahmoud.felfel@dubizzle.com>
 
@@ -31,4 +31,4 @@ RUN set -e && \
 
 EXPOSE 80 9090
 
-CMD ["service $SERVICE_NAME start"]
+CMD         ["/sbin/my_init"]
