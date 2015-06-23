@@ -22,13 +22,12 @@ RUN set -e && \
 ADD         archive.tar.gz $REPO_DIR
 
 RUN set -e && \
-    chown -R dubizzle:dubizzle $VENV_DIR && \
-    mkdir -p $SERVICE_DIR && \
-    mkdir -p /var/log/dubizzle && \
-    cp $REPO_DIR/docker/services/$SERVICE_NAME.sh $SERVICE_DIR/run; \
-    chmod +x $SERVICE_DIR/run; \
-    chown $USER:$USER -R /var/log/dubizzle; \
-    chmod +x /etc/service/nginx/run
+    mkdir -p $SERVICE_DIR &&\
+    mkdir -p /var/log/dubizzle &&\
+    cp $REPO_DIR/docker/services/$SERVICE_NAME.sh $SERVICE_DIR/run && \
+    chmod +x $SERVICE_DIR/run &&\
+    chown $USER:$USER -R /var/log/dubizzle &&\
+    chmod +x $SERVICE_DIR/run
 
 EXPOSE 80 9090
 
