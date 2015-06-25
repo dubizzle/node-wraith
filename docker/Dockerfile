@@ -6,9 +6,9 @@ ENV         USER                    dubizzle
 ENV         GROUP                   $USER
 ENV         USER_DIR                /home/$USER
 ENV         SERVICE_NAME            node-wraith
-ENV         REPO_DIR                $USER_DIR/SERVICE_NAME
+ENV         REPO_DIR                $USER_DIR/$SERVICE_NAME
 ENV         USER_LOGGING_DIR        /var/log/$USER
-ENV         SERVICE_DIR             /etc/service/SERVICE_NAME
+ENV         SERVICE_DIR             /etc/service/$SERVICE_NAME
 
 
 RUN set -e && \
