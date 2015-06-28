@@ -13,7 +13,7 @@ ENV         SERVICE_DIR             /etc/service/$SERVICE_NAME
 
 RUN set -e && \
     apt-get update -y && \
-    apt-get install -y nodejs npm && \
+    apt-get install -y git nodejs npm && \
     useradd -m -d $USER_DIR -p $USER -s /bin/bash $USER && \
     chown -R $USER:$USER $USER_DIR && \
     mkdir -p $USER_LOGGING_DIR && \
@@ -21,12 +21,13 @@ RUN set -e && \
 
 ADD         archive.tar.gz $REPO_DIR
 
-RUN set -e && \
-    mkdir -p $SERVICE_DIR &&\
-    mkdir -p /var/log/dubizzle &&\
-    cp $REPO_DIR/docker/services/$SERVICE_NAME.sh $SERVICE_DIR/run && \
-    chmod +x $SERVICE_DIR/run &&\
-    chown $USER:$USER -R /var/log/dubizzle &&\
+RUN set -e; \
+    mkdir -p $SERVICE_DIR;\
+    mkdir -p /var/log/dubizzle;\
+    cp $REPO_DIR/docker/services/$SERVICE_NAME.sh $SERVICE_DIR/run; \
+    chmod +x $SERVICE_DIR/run;\
+    chown $USER:$USER -R $REPO_DIR;\
+    chown $USER:$USER -R /var/log/dubizzle;\
     chmod +x $SERVICE_DIR/run
 
 EXPOSE 80 9090
