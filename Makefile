@@ -1,5 +1,5 @@
 DEFAULT_DOCKER_IMAGE_NAME=dubizzledotcom/node_wraith
-DEFAULT_DOCKER_IMAGE_VERSION=0.01
+DEFAULT_DOCKER_IMAGE_VERSION=0.0.1
 SHELL=/bin/bash
 GIT_BRANCH = $(shell git symbolic-ref --short -q HEAD)
 

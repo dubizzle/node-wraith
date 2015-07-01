@@ -8,24 +8,35 @@ ENV         USER_DIR                /home/$USER
 ENV         SERVICE_NAME            node-wraith
 ENV         REPO_DIR                $USER_DIR/$SERVICE_NAME
 ENV         USER_LOGGING_DIR        /var/log/$USER
-ENV         SERVICE_DIR             /etc/service/$SERVICE_NAME
+
+RUN \
+  apt-get update && \
+  apt-get upgrade -y && \
+  apt-get install -y  vim wget build-essential g++ flex bison gperf ruby perl \
+  libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev \
+  libpng-dev libjpeg-dev python libx11-dev libxext-dev
 
 
-RUN set -e && \
-    useradd -m -d $USER_DIR -p $USER -s /bin/bash $USER && \
+# PhantomJS
+RUN cd /tmp && \
+    curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-x86_64.tar.bz2 && \
+    tar xjf /tmp/phantomjs-1.9.7-linux-x86_64.tar.bz2 -C /tmp && \
+    mv /tmp/phantomjs-1.9.7-linux-x86_64/bin/phantomjs /usr/local/bin && \
+    rm -rf /tmp/phantomjs-1.9.7-linux-x86_64
+
+RUN useradd -m -d $USER_DIR -p $USER -s /bin/bash $USER && \
     chown -R $USER:$USER $USER_DIR && \
     mkdir -p $USER_LOGGING_DIR && \
     chmod oug+rw -R $USER_LOGGING_DIR
 
-ADD         archive.tar.gz $REPO_DIR
+ADD archive.tar.gz $REPO_DIR
 
 WORKDIR $REPO_DIR
 
-RUN mkdir -p /var/log/dubizzle;\
-    chown $USER:$USER -R $REPO_DIR;\
-    chown $USER:$USER -R /var/log/dubizzle;\
-    npm install
+RUN chown $USER:$USER -R $REPO_DIR;\
+    npm install;\
+    npm update
 
 EXPOSE 80 9090
 
-CMD  node $REPO_DIR/cli.js --config $REPO_DIR/config/chrome.json $USER_LOGGING_DIR/$SERVICE_NAME.log 2>&1
+CMD node $REPO_DIR/cli.js --config $REPO_DIR/config/chrome.json $USER_LOGGING_DIR/$SERVICE_NAME.log 2>&1
