@@ -39,4 +39,4 @@ RUN chown $USER:$USER -R $REPO_DIR;\
 
 EXPOSE 80 9090
 
-CMD node $REPO_DIR/cli.js --config $REPO_DIR/config/chrome.json $USER_LOGGING_DIR/$SERVICE_NAME.log 2>&1
+CMD npm run wraith >> $USER_LOGGING_DIR/$SERVICE_NAME.log 2>&1

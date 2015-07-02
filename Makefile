@@ -10,4 +10,3 @@ docker:
 	mkdir docker/node-wraith
 	git archive --format tar.gz --output docker/archive.tar.gz $(GIT_BRANCH)
 	docker build -t $${IMAGE_NAME:-$(DEFAULT_DOCKER_IMAGE_NAME)}:$${IMAGE_VERSION:-$(DEFAULT_DOCKER_IMAGE_VERSION)} docker
-	#rm -rf docker/archive.tar.gz docker/node-wraith
