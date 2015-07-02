@@ -19,7 +19,10 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "scripts": {},
+  "scripts": {
+    "wraith" : "node cli.js --config ./config/chrome.json",
+    "test": "mocha --ui bdd --reporter spec --require should --globals i ./test/tests.js"
+  },
   "files": [
     "index.js",
     "cli.js",
@@ -57,7 +60,7 @@
     "progress": "^1.1.8",
     "rimraf": "~2.2.6",
     "w3counter": "^1.0.3",
-    "webshot": "^0.15.3",
+    "webshot": "^0.16.0",
     "mkdirp": "^0.3.5",
     "connect": "^3.3.5",
     "open": "^0.0.5",
