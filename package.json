@@ -19,7 +19,10 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "scripts": {},
+  "scripts": {
+    "wraith" : "node cli.js --config ./config/chrome.json",
+    "test": "mocha --ui bdd --reporter spec --require should --globals i ./test/tests.js"
+  },
   "files": [
     "index.js",
     "cli.js",
